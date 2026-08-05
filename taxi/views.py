@@ -115,7 +115,7 @@ class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 class ToggleAssignToCarView(LoginRequiredMixin, View):
-    def post(request, pk):
+    def post(self, request, pk):
         car = get_object_or_404(Car, pk=pk)
         if request.user in car.drivers.all():
             car.drivers.remove(request.user)
