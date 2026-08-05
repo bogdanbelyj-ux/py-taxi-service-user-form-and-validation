@@ -94,7 +94,6 @@ class DriverDetailView(LoginRequiredMixin, generic.DetailView):
 
 class DriverCreateView(LoginRequiredMixin, generic.CreateView):
     model = Driver
-    fields = "__all__"
     class_form = DriverCreationForm
 
 
@@ -116,9 +115,8 @@ class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 class ToggleAssignToCarView(LoginRequiredMixin, View):
-    def post(self, request, pk):
+    def post(request, pk):
         car = get_object_or_404(Car, pk=pk)
-
         if request.user in car.drivers.all():
             car.drivers.remove(request.user)
         else:
